@@ -1,0 +1,159 @@
+* What is a version control system? (VCS)
+  => Many revisions of a same document.
+
+
+* Why is VCS useful?
+  - enforce discippline
+  - archive versions
+  - mantain historical information
+  - enable collaboration
+  - recover from accidental deletions or edits
+  - conserve disk space
+
+
+* Whats is Git?
+  => VCS for tracking changes in computer files.
+    - distributed version control
+    - coordinates work between multiple developers
+    - who made whats changes and when
+    - revert back at any time
+    - local & remote repos
+
+   
+* Concepst of GIT:
+  - keep track of code history
+  - takes 'snapshots' of your files
+  - u decide when to take a snapshot by making a 'commit'
+  - you can visit any snapshot ate any time
+  - u can stage files before commiting
+
+
+* Installing git on linux (Debian):
+  $ sudo apt-get install git
+
+
+* Basic commands:
+  $ git init // Initialize local git repository
+  $ git add <file> // Add file(s) to index
+  $ git status // Check status of working Tree
+  $ git commit  // Commit changes in index
+  $ git push // Push to remote repository
+  $ git pull // Pull latest from remote repository
+  $ git clone // Clone repository into a new directory
+
+  - Remove files from stage area after add:
+    $ git add <file>
+    $ git rm --cached <file>
+    $ git reset -- <file>
+
+  - To see what you’ve changed:
+    $ git diff // only changes that are still unstaged
+    $ git diff --staged // compares your staged changes to your last commit
+    $ git diff --cached // synonym of --staged
+
+* After init your local repo.
+  - You can view all of your settings and where they are coming from using:
+    $ git config --list --show-origin
+
+  - New config:
+    $ git config --global user.name 'Cauê Mustafá'
+    $ git config --global user.email 'cauemustafa@live.com'
+  
+  - To set main as the default branch name do:
+    $ git config --global init.defaultBranch main
+
+  - Checking Your Settings:
+    $ git config --list
+
+  - git config <key>:
+    $ git config user.name // Cauê Mustafá
+    $ git config user.email // cauemustafa@live.com
+
+
+* Using git inore:
+  - The files or directories in gitignore dont do commiteds if changeds.
+    $ touch .gitignore
+    // add the name of files in the file .gitignore
+
+    $ git ls-files --others --ignored --exclude-standard
+    // lista todos os srquivos ignorados neste projeto
+
+  - create a new branch:
+    $ git branch <newBranch>
+    $ git checkout <branch>
+
+  ** or **
+
+  $ git checkout -b <newBranch>
+
+
+* Merging branch:
+  $ git merge <branch>
+  $ git commit -m 'merging <branch>'
+
+  
+* Adding Remote Repositories:
+  $ git remote add <shortname> <url>
+  $ git remote add origin <https ou SSH> // github
+
+  - pushing to remote repository
+  $ git push -u origin <https ou SSH>
+  $ git remote // a list of remote repositories
+
+
+* branching:
+  $ touch <file>
+  $ git status
+  $ git stash
+  $ git stash apply
+  $ git status
+
+
+* Fetching
+  $ git remote -v
+  $ git fetch origin // get any changes made since you last cloned or fetched 
+  $ git merge origin // if you use git fetch you need to merge manually
+
+  
+* Pulling
+  $ git pull origin // fetch and merge automatically the changes from the remote branch into your current branch
+
+
+* Getting Help!
+  => Get the comprehensive manual page (manpage) help for any of the Git commands:
+    $ git help <verb>
+    $ git <verb> --help
+    $ man git-<verb>
+
+  - for example:
+    $ git help config
+    $ git add -h
+
+
+* Git log
+  $ git log -p -2 // --patch
+  $ git log --stat
+  $ git log --pretty=format:"%h - %an, %ar : %s"
+  $ git log --since=2.weeks
+  $ git log -S function_name
+
+
+* Undoing Things:
+  $ git commit --amend
+
+  - As an example, if you commit and then realize you forgot to stage the changes in a file you wanted 45 to add to this commit, you can do something like this:
+    $ git commit -m 'Initial commit'
+    $ git add forgotten_file
+    $ git commit --amend
+
+  - git reset
+    $ git reset --soft HEAD~3 //remove os três primeiros commits sem perder as alterações
+    
+  - git rebase
+    $ git rebase -i HEAD~3
+    ~pick
+    ~squase
+  
+  - git reset
+  $ git reset -- <file>
+  $ git add -i
